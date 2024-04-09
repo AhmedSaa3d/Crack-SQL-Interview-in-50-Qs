@@ -36,43 +36,43 @@
   from Tweets
   where length(content) > 15
   ```
-  ## 2.Basic Joins [9P]
-- [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50)
+## 2.Basic Joins [9P]
+  - [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select unique_id, name
   from Employees
   left join EmployeeUNI
   on Employees.id = EmployeeUNI.id
   ```
-- [1068. Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1068. Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select product_name, year, price
   from Sales
   inner join Product
   on Product.product_id = Sales.product_id
   ```
-- [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   SELECT customer_id, COUNT(*) AS count_no_trans
   FROM Visits
   WHERE visit_id NOT IN (SELECT visit_id FROM Transactions)
   GROUP BY customer_id;
   ```
-- [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select w2.id
   from weather w1
   inner join weather w2
   on w2.temperature > w1.temperature and datediff(w2.recordDate, w1.recordDate) = 1
   ```
-- [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select a1.machine_id, round(avg(a2.timestamp - a1.timestamp),3) as processing_time
   from activity as a1, activity as a2
   where a1.machine_id = a2.machine_id and a1.process_id = a2.process_id and a1.activity_type = "start" and a2.activity_type = "end"
   group by a1.machine_id
   ```
-- [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select e.name, b.bonus
   from Employee as e 
@@ -84,7 +84,7 @@
   ``` sql
  
   ```
-- [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
    select name
   from employee
@@ -104,8 +104,8 @@
   on s.user_id = c.user_id
   group by user_id
   ```
-  ## 3.Basic Aggregate Functions [8P]
-- [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50)
+## 3.Basic Aggregate Functions [8P]
+  - [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select id, movie, description, rating
   from Cinema
@@ -120,7 +120,7 @@
   on p.product_id = u.product_id and u.purchase_date >= p.start_date and u.purchase_date <= p.end_date
   group by p.product_id
   ```
-- [1075. Project Employees I](https://leetcode.com/problems/project-employees-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1075. Project Employees I](https://leetcode.com/problems/project-employees-i/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select p.project_id, round(avg(e.experience_years),2) as average_years
   from Project as p
@@ -137,7 +137,7 @@
   group by r.contest_id
     order by percentage desc, r.contest_id asc
   ```
-- [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select query_name, round( sum(rating/position)/count(query_name), 2) as quality,
        round(count(CASE WHEN rating < 3 THEN 1 END) / count(rating) * 100, 2)  as poor_query_percentage
@@ -145,7 +145,7 @@
   where query_name is not null
   group by query_name
   ```
-- [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select CONCAT(YEAR(trans_date), '-', LPAD(MONTH(trans_date), 2, '0')) AS month,
        country, 
@@ -156,29 +156,29 @@
   from transactions
   group by month, country
   ```
-- [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
 
   ```
-- [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
 
   ```
-  ## 4.Sorting and Grouping [7P]
-- [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50)
+## 4.Sorting and Grouping [7P]
+  - [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select teacher_id, count(distinct subject_id) as cnt
   from teacher
   group by teacher_id
   ```
-- [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select activity_date as day, count(distinct user_id) as active_users
   from activity
   where activity_date between '2019-06-28' and '2019-07-27'
   group by activity_date
   ```
-- [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select product_id, year as first_year, quantity, price
   from sales as s
@@ -188,21 +188,21 @@
     group by product_id
   )
   ```
-- [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select class
   from courses
   group by class
   having count(distinct student) >= 5
   ```
-- [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select user_id , count(follower_id) as followers_count
   from followers
   group by user_id
   order by user_id asc
   ```
-- [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   SELECT CASE 
     WHEN COUNT(*) > 0 THEN MAX(num)
@@ -216,16 +216,16 @@
     HAVING COUNT(num) = 1
   ) as myNewNumbers;
   ```
-- [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/description/?envType=study-plan-v2&envId=top-sql-50)
+  - [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
   select customer_id
   from customer
   group by customer_id
   having count(distinct product_key) = (select count(product_key) from product)
   ```
-   ## 5.Advanced Select and Joins [7P]
-   ## 6.Subqueries [7P]
-   ## 7.Advanced String Functions / Regex / Clause [7P]
+ ## 5.Advanced Select and Joins [7P]
+ ## 6.Subqueries [7P]
+ ## 7.Advanced String Functions / Regex / Clause [7P]
    
 
   ```

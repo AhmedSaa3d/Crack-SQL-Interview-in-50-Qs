@@ -1,6 +1,7 @@
 # Crack-SQL-Interview-in-50-Qs
   - Solve LeetCode Challenges in SQL
-  - Problems Link : https://leetcode.com/studyplan/top-sql-50/ 
+  - [pip](https://pip.pypa.io/en/stable/)
+  - Problems Link : [Link](https://leetcode.com/studyplan/top-sql-50/) 
 ## 1.Select [5P]
  - 1757 Recyclable and Low Fat Products
    ``` sql

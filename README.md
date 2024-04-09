@@ -3,9 +3,11 @@
   - Problems Link : https://leetcode.com/studyplan/top-sql-50/ 
 ## 1.Select [5P]
  - 1757 Recyclable and Low Fat Products
+   ``` sql
      select product_id
      from Products
      where low_fats = 'Y' and recyclable = 'Y'
+   ```
  - 584 Find Customer Referee
    select name
   from Customer

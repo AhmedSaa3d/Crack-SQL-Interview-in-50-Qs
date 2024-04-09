@@ -1,11 +1,11 @@
-# Crack-SQL-Interview-in-50-Qs
-  - Solve LeetCode Challenges in SQL
+# Crack SQL Interview in 50 QS
+  - Solve LeetCode Challenges in SQL  [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
   - EASY :   32P
   - MEDIUM : 17P
   - HRAD :   1P
-  - [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
+  
 ## 1.Select [5P]
- - [1757 Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/?envType=study-plan-v2&envId=top-sql-50)
+ - [1757 Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/?envType=study-plan-v2&envId=top-sql-50) --> easy
    ``` sql
      select product_id
      from Products
@@ -156,52 +156,77 @@
   from transactions
   group by month, country
   ```
-- []()
+- [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
 
   ```
-- []()
+- [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
 
   ```
-- []()
+  ## 4.Sorting and Grouping [7P]
+- [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select teacher_id, count(distinct subject_id) as cnt
+  from teacher
+  group by teacher_id
   ```
-- []()
+- [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select activity_date as day, count(distinct user_id) as active_users
+  from activity
+  where activity_date between '2019-06-28' and '2019-07-27'
+  group by activity_date
   ```
-- []()
+- [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select product_id, year as first_year, quantity, price
+  from sales as s
+  where (product_id, year) in (
+    select product_id, min(year)
+    from sales
+    group by product_id
+  )
   ```
-- []()
+- [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select class
+  from courses
+  group by class
+  having count(distinct student) >= 5
   ```
-- []()
+- [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select user_id , count(follower_id) as followers_count
+  from followers
+  group by user_id
+  order by user_id asc
   ```
-- []()
+- [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  SELECT CASE 
+    WHEN COUNT(*) > 0 THEN MAX(num)
+    ELSE NULL
+    END 
+    AS num
+  FROM (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(num) = 1
+  ) as myNewNumbers;
   ```
-- []()
+- [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
-
+  select customer_id
+  from customer
+  group by customer_id
+  having count(distinct product_key) = (select count(product_key) from product)
   ```
-- []()
-  ``` sql
-
-  ```
-- []()
-  ``` sql
-
-  ```
-- []()
-  ``` sql
+   ## 5.Advanced Select and Joins [7P]
+   ## 6.Subqueries [7P]
+   ## 7.Advanced String Functions / Regex / Clause [7P]
+   
 
   ```
 - []()

@@ -1,5 +1,8 @@
 # Crack-SQL-Interview-in-50-Qs
   - Solve LeetCode Challenges in SQL
+  - EASY :   32P
+  - MEDIUM : 17P
+  - HRAD :   1P
   - [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
 ## 1.Select [5P]
  - [1757 Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/?envType=study-plan-v2&envId=top-sql-50)
@@ -28,29 +31,182 @@
   order by author_id asc
   ```
 - [1683. Invalid Tweets](https://leetcode.com/problems/invalid-tweets/description/?envType=study-plan-v2&envId=top-sql-50)
-  ``` mysql
+  ``` sql
   select tweet_id 
   from Tweets
   where length(content) > 15
   ```
-- []()
+  ## 2.Basic Joins [9P]
+- [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50)
   ``` sql
+  select unique_id, name
+  from Employees
+  left join EmployeeUNI
+  on Employees.id = EmployeeUNI.id
+  ```
+- [1068. Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select product_name, year, price
+  from Sales
+  inner join Product
+  on Product.product_id = Sales.product_id
+  ```
+- [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  SELECT customer_id, COUNT(*) AS count_no_trans
+  FROM Visits
+  WHERE visit_id NOT IN (SELECT visit_id FROM Transactions)
+  GROUP BY customer_id;
+  ```
+- [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select w2.id
+  from weather w1
+  inner join weather w2
+  on w2.temperature > w1.temperature and datediff(w2.recordDate, w1.recordDate) = 1
+  ```
+- [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select a1.machine_id, round(avg(a2.timestamp - a1.timestamp),3) as processing_time
+  from activity as a1, activity as a2
+  where a1.machine_id = a2.machine_id and a1.process_id = a2.process_id and a1.activity_type = "start" and a2.activity_type = "end"
+  group by a1.machine_id
+  ```
+- [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select e.name, b.bonus
+  from Employee as e 
+  left join bonus as b
+  on e.empId = b.empId 
+  where b.bonus < 1000 or b.bonus is null
+  ```
+  - [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+ 
+  ```
+- [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+   select name
+  from employee
+  where id in (
+                select managerId
+                from employee
+                group by managerId
+                having count(id) >= 5
+            )
+  ```
+  - [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select s.user_id, round(
+        ifnull (count( case when action = 'confirmed' then 1 end) / count(action), 0), 2) as confirmation_rate
+  from signups as s
+  left join confirmations c
+  on s.user_id = c.user_id
+  group by user_id
+  ```
+  ## 3.Basic Aggregate Functions [8P]
+- [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select id, movie, description, rating
+  from Cinema
+  where description <> "boring" and mod(id,2) = 1 
+  order by rating desc
+  ```
+  - [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select p.product_id, ifnull(round(sum(u.units*p.price)/sum(u.units),2),0) as average_price
+  from Prices as p
+  left join UnitsSold as u
+  on p.product_id = u.product_id and u.purchase_date >= p.start_date and u.purchase_date <= p.end_date
+  group by p.product_id
+  ```
+- [1075. Project Employees I](https://leetcode.com/problems/project-employees-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select p.project_id, round(avg(e.experience_years),2) as average_years
+  from Project as p
+  left join Employee as e
+  on p.employee_id = e.employee_id
+  group by p.project_id
+  ```
+  - [1633. Percentage of Users Attended a Contest](https://leetcode.com/problems/percentage-of-users-attended-a-contest/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select r.contest_id ,round((count(u.user_id) / (select count(user_id) from Users))*100.00,2) as percentage
+  from Register as r
+  left join Users as u
+  on r.user_id = u.user_id
+  group by r.contest_id
+    order by percentage desc, r.contest_id asc
+  ```
+- [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select query_name, round( sum(rating/position)/count(query_name), 2) as quality,
+       round(count(CASE WHEN rating < 3 THEN 1 END) / count(rating) * 100, 2)  as poor_query_percentage
+  from queries
+  where query_name is not null
+  group by query_name
+  ```
+- [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/description/?envType=study-plan-v2&envId=top-sql-50)
+  ``` sql
+  select CONCAT(YEAR(trans_date), '-', LPAD(MONTH(trans_date), 2, '0')) AS month,
+       country, 
+       count(state) as trans_count,
+       sum(case when state = 'approved' then 1 else 0 end) as approved_count,
+       sum(amount) as trans_total_amount,
+       sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
+  from transactions
+  group by month, country
   ```
 - []()
   ``` sql
-  ```
-  - []()
-  ``` sql
-  ```
-- []()
-  ``` sql
-  ```
 
-- []()
-  ``` sql
   ```
 - []()
   ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
+  ```
+- []()
+  ``` sql
+
   ```
 
 

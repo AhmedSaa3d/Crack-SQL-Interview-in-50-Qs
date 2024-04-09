@@ -1,5 +1,5 @@
 # Crack SQL Interview in 50 QS
-  * Solve LeetCode Challenges in SQL  [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
+  * Solve LeetCode Challenges in structured query language usign MySql [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
   * EASY :   32 Prpblem
   * MEDIUM : 17 Problem
   * HRAD :   1P Problem

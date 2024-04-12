@@ -238,14 +238,24 @@
  ## 6.Subqueries [7P]
  ## 7.Advanced String Functions / Regex / Clause [7P]
 * [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
-    ``` sql
-    select user_id, 
-        concat(
-            upper(left(name,1)) , 
-            lower(right(name, length(name)-1))) as name
+  ``` sql
+  select user_id, 
+      concat(
+          upper(left(name,1)) , 
+          lower(right(name, length(name)-1))) as name
   from users
   order by user_id
+  ```
+  * [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+    ``` sql
+    select *
+    from patients
+    where conditions LIKE '% DIAB1__ %' OR
+          conditions LIKE 'DIAB1__ %' OR
+          conditions LIKE '% DIAB1__' OR
+          conditions LIKE 'DIAB1__' 
     ```
+     
   ```
 
 

@@ -158,7 +158,18 @@
     ```
   * [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql
-  
+    select ROUND(
+           SUM(
+              CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END
+              ) 
+              / COUNT(*) * 100 , 2
+             ) as immediate_percentage
+    from delivery
+    where (customer_id,order_date) in (
+                    select customer_id,min(order_date) 
+                    from delivery 
+                    group by customer_id
+                    )
     ```
   * [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql

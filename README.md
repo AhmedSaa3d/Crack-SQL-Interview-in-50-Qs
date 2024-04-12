@@ -255,6 +255,12 @@
        conditions LIKE '% DIAB1__' OR
        conditions LIKE 'DIAB1__' 
   ```
+* [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+  ``` sql
+  delete p
+  from person as p , person as s
+  where p.email = s.email and p.id > s.id 
+  ```
      
   ```
 

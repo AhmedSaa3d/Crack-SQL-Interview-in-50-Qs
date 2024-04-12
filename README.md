@@ -246,15 +246,15 @@
   from users
   order by user_id
   ```
-  * [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
-    ``` sql
-    select *
-    from patients
-    where conditions LIKE '% DIAB1__ %' OR
-          conditions LIKE 'DIAB1__ %' OR
-          conditions LIKE '% DIAB1__' OR
-          conditions LIKE 'DIAB1__' 
-    ```
+* [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+  ``` sql
+  select *
+  from patients
+  where conditions LIKE '% DIAB1__ %' OR
+       conditions LIKE 'DIAB1__ %' OR
+       conditions LIKE '% DIAB1__' OR
+       conditions LIKE 'DIAB1__' 
+  ```
      
   ```
 

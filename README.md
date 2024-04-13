@@ -235,6 +235,16 @@
     having count(distinct product_key) = (select count(product_key) from product)
     ```
  ## 5.Advanced Select and Joins [7P]
+ * [1731. The Number of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+   ``` sql
+   select e1.employee_id, e1.name,
+       count(e2.reports_to) as reports_count, round(avg(e2.age)) as average_age
+   from employees as e1
+   join employees as e2
+   on e1.employee_id = e2.reports_to
+   group by e1.employee_id
+   order by employee_id
+   ```
  ## 6.Subqueries [7P]
  ## 7.Advanced String Functions / Regex / Clause [7P]
 * [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/?envType=study-plan-v2&envId=top-sql-50) - Easy

@@ -271,9 +271,21 @@
   from person as p , person as s
   where p.email = s.email and p.id > s.id 
   ```
-     
+* [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
+  ``` sql 
+
   ```
+* [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+  ``` sql
 
-
+  ```
+* [1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+  ``` sql
   
-       
+  ```
+* [1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails/description/?envType=study-plan-v2&envId=top-sql-500) - Easy
+  ``` sql
+  select *
+  from users
+  where mail regexp '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\\.com$'
+  ```

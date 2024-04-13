@@ -286,7 +286,15 @@
   ```
 * [1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  
+  select p.product_name, sum(o.unit) as unit
+  from products as p
+  left join orders as o
+  on p.product_id = o.product_id
+  where YEAR(o.order_date) = 2020
+      AND MONTH(o.order_date) = 2
+  group by p.product_id
+  having unit >= 100  
+   # another sol use --> WHERE DATE_FORMAT(O.order_date,'%Y-%m') ='2020-02'
   ```
 * [1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails/description/?envType=study-plan-v2&envId=top-sql-500) - Easy
   ``` sql

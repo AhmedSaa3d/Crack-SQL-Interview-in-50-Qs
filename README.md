@@ -246,6 +246,18 @@
    order by employee_id
    ```
  ## 6.Subqueries [7P]
+ * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+  ``` sql
+  select employee_id
+  from   employees
+  where  salary < 30000 and 
+       manager_id not in(
+            select employee_id
+            from employees
+      )
+  order by employee_id
+  ```
+
  ## 7.Advanced String Functions / Regex / Clause [7P]
 * [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql

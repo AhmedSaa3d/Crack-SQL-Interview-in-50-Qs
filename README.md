@@ -36,6 +36,7 @@
   from Tweets
   where length(content) > 15
   ```
+  
 ## 2.Basic Joins [9P]
   * [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
@@ -104,6 +105,7 @@
     on s.user_id = c.user_id
     group by user_id
     ```
+    
 ## 3.Basic Aggregate Functions [8P]
   * [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
@@ -179,6 +181,7 @@
     on b.player_id = a.player_id 
     where DATE_ADD(b.event_date, INTERVAL 1 DAY) = A.event_date; 
     ```
+    
 ## 4.Sorting and Grouping [7P]
   * [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
@@ -238,6 +241,7 @@
     group by customer_id
     having count(distinct product_key) = (select count(product_key) from product)
     ```
+    
  ## 5.Advanced Select and Joins [7P]
  * [1731. The Number of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
@@ -249,17 +253,63 @@
    group by e1.employee_id
    order by employee_id
    ```
+   
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
-  ``` sql
-  select employee_id
-  from   employees
-  where  salary < 30000 and 
+   ``` sql
+   select employee_id
+   from   employees
+   where  salary < 30000 and 
        manager_id not in(
             select employee_id
             from employees
       )
-  order by employee_id
+   order by employee_id
+   ```
+ * [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
+   ``` sql
+
+   ```
+ * [1341. Movie Rating](https://leetcode.com/problems/movie-rating/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
+   ``` sql
+   select name as results
+   from (
+    select u.name, count(u.name) as cnt 
+    from movieRating as m
+    join users as u
+    on u.user_id = m.user_id
+    group by u.name
+    order by cnt desc, u.name asc
+    limit 1
+   ) as innerTble1
+   UNION ALL
+   select title as results
+   from (
+    select s.title, avg(m.rating) as rat 
+    from movieRating as m
+    join movies as s
+    on s.movie_id = m.movie_id
+    where MONTH(m.created_at) = 2 AND YEAR(m.created_at) = 2020
+    group by s.title
+    order by rat desc, s.title asc
+    limit 1
+   ) as innerTble2
+   ```
+ * [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/?envType=study-plan-v2&envId=top-sql-50) - Medium
+  ``` sql
+
+  ```
+ * [602. Friend Requests II: Who Has the Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/?envType=study-plan-v2&envId=top-sql-50) - Medium
+  ``` sql
+
+  ```
+ * [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016/?envType=study-plan-v2&envId=top-sql-50) - Medium
+  ``` sql
+
+  ```
+ * [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/description/?envType=study-plan-v2&envId=top-sql-50) - Hard
+  ``` sql
+
   ```
 
  ## 7.Advanced String Functions / Regex / Clause [7P]

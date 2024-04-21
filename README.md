@@ -289,7 +289,12 @@
   ```
 * [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql 
-
+  select (case when count(distinct salary) > 1 then (
+    select salary from (
+        select distinct salary from employee order by salary desc limit 2
+    ) as emp order by salary asc limit 1
+  ) else null end) as SecondHighestSalary
+  from employee
   ```
 * [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql

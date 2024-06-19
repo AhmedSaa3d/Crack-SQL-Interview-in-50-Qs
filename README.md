@@ -253,6 +253,22 @@
    group by e1.employee_id
    order by employee_id
    ```
+* [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/description/?envType=study-plan-v2&envId=top-sql-50)
+   ``` sql
+  SELECT employee_id, department_id
+  FROM Employee
+  WHERE primary_flag = 'Y'
+  UNION
+  SELECT employee_id, department_id
+  FROM Employee
+  GROUP BY employee_id
+  HAVING count(employee_id) = 1;
+  ```
+* [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/description/?envType=study-plan-v2&envId=top-sql-50)
+   ``` sql
+  
+  ```
+    
    
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy

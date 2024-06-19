@@ -253,7 +253,7 @@
    group by e1.employee_id
    order by employee_id
    ```
-* [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/description/?envType=study-plan-v2&envId=top-sql-50)
+* [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
   SELECT employee_id, department_id
   FROM Employee
@@ -264,11 +264,19 @@
   GROUP BY employee_id
   HAVING count(employee_id) = 1;
   ```
-* [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/description/?envType=study-plan-v2&envId=top-sql-50)
+* [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
+   ``` sql
+  SELECT x, y, z, 
+    CASE 
+        WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes'
+        ELSE 'No'
+    END AS triangle
+  FROM Triangle;
+  ```
+* [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
   
-  ```
-    
+  ```  
    
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy

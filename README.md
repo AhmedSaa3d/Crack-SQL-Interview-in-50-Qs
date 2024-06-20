@@ -284,7 +284,21 @@
   ```  
 * [1164. Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-  
+  SELECT product_id, new_price as price
+  FROM Products
+  WHERE (product_id, change_date) IN
+  (
+    SELECT product_id, MAX(change_date) 
+    FROM products
+    WHERE change_date <= '2019-08-16'
+    GROUP BY product_id
+  )  
+  UNION
+  SELECT product_id, '10' as price
+  FROM Products
+  GROUP BY product_id
+  HAVING MIN(change_date) > '2019-08-16' 
+  ORDER BY product_id
   ```
 * [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

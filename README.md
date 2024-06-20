@@ -275,9 +275,25 @@
   ```
 * [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-  
+   SELECT DISTINCT L1.num AS ConsecutiveNums
+  FROM Logs L1
+  INNER JOIN Logs L2 
+  ON L1.id - L2.id = 1 AND L1.num = L2.num
+  INNER JOIN Logs L3 
+  ON L1.id - L3.id = 2 AND L1.num = L3.num
   ```  
-   
+* [1164. Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date/?envType=study-plan-v2&envId=top-sql-50) - Medium
+   ``` sql
+  
+  ```
+* [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/?envType=study-plan-v2&envId=top-sql-50) - Medium
+   ``` sql
+  
+  ```
+* [1907. Count Salary Categories](https://leetcode.com/problems/count-salary-categories/?envType=study-plan-v2&envId=top-sql-50) - Medium
+   ``` sql
+  
+  ```       
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql

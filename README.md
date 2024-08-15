@@ -321,18 +321,26 @@
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
-   select employee_id
-   from   employees
-   where  salary < 30000 and 
-       manager_id not in(
-            select employee_id
-            from employees
+   SELECT employee_id
+   FROM employees
+   WHERE  salary < 30000 and 
+       manager_id NOT IN(
+            SELECT employee_id
+            FROM employees
       )
-   order by employee_id
+   ORDER BY employee_id
    ```
  * [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-
+   SELECT s1.id, s2.student
+   FROM Seat s1
+   LEFT JOIN Seat s2
+   ON s2.id = 
+   CASE 
+     WHEN s1.id % 2 = 0 THEN s1.id - 1 
+     WHEN s1.id % 2 = 1 AND (SELECT COUNT(*) FROM Seat) = s1.id THEN s1.id
+     WHEN s1.id % 2 = 1 THEN s1.id + 1
+   END;
    ```
  * [1341. Movie Rating](https://leetcode.com/problems/movie-rating/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

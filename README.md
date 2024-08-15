@@ -294,7 +294,7 @@
     GROUP BY product_id
   )  
   UNION
-  SELECT product_id, '10' as price
+  SELECT product_id, 10 as price
   FROM Products
   GROUP BY product_id
   HAVING MIN(change_date) > '2019-08-16' 

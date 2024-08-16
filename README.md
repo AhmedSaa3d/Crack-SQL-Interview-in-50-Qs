@@ -302,7 +302,16 @@
   ```
 * [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-  
+  SELECT person_name
+  FROM(
+      SELECT person_name, weight, @sum := @sum + weight AS cumulativeSum
+      FROM
+        (SELECT * FROM Queue ORDER BY turn ASC) AS turnTable,
+        (SELECT @sum := 0) AS init
+  ) AS cumulativeTable
+  WHERE cumulativeSum <= 1000
+  ORDER BY cumulativeSum DESC
+  LIMIT 1;
   ```
 * [1907. Count Salary Categories](https://leetcode.com/problems/count-salary-categories/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

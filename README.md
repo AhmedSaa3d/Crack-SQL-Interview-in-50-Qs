@@ -83,7 +83,14 @@
     ```
   * [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-   
+    SELECT stud.student_id, stud.student_name, sub.subject_name, COUNT(exam.subject_name) AS attended_exams
+    FROM Students stud
+    CROSS JOIN Subjects sub
+    LEFT JOIN Examinations exam
+    ON stud.student_id = exam.student_id
+    AND sub.subject_name = exam.subject_name
+    GROUP BY stud.student_name, sub.subject_name
+    ORDER BY stud.student_id, sub.subject_name
     ```
   * [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50) * Medium
     ``` sql

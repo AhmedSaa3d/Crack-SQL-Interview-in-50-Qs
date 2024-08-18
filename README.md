@@ -393,7 +393,19 @@
   ```
  * [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql
-
+  SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016
+  FROM Insurance
+  WHERE tiv_2015 IN(
+     SELECT tiv_2015
+     FROM Insurance
+     GROUP BY tiv_2015
+     HAVING COUNT(*) > 1 -- Duplicate ROWS
+  )AND (lat, lon) IN(
+     SELECT lat, lon
+     FROM Insurance
+     GROUP BY lat, lon
+     HAVING COUNT(*) = 1 -- UNIQUE ROWS
+  );
   ```
  * [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/description/?envType=study-plan-v2&envId=top-sql-50) - Hard
   ``` sql

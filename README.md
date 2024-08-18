@@ -1,8 +1,8 @@
 # Crack SQL Interview in 50 QS
   * Solve LeetCode Challenges in structured query language usign MySql [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
-  * EASY :   32 Prpblem
-  * MEDIUM : 17 Problem
-  * HRAD :   1P Problem
+  * EASY   : 32 Prpblems
+  * MEDIUM : 17 Problems
+  * HRAD   : 1  Problem
   
 ## 1.Select [5P]
  * [1757 Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/?envType=study-plan-v2&envId=top-sql-50) * Easy

@@ -1,5 +1,5 @@
 # Crack SQL Interview in 50 QS
-  * Solve LeetCode Challenges in structured query language usign MySql [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
+  * Solve LeetCode Challenges in structured query language using MS SQL SERVER  [Problems Link](https://leetcode.com/studyplan/top-sql-50/) 
   * EASY   : 32 Prpblems
   * MEDIUM : 17 Problems
   * HRAD   : 1  Problem
@@ -23,11 +23,8 @@
   ```
 * [1683. Invalid Tweets](https://leetcode.com/problems/invalid-tweets/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
   ``` sql
-  select tweet_id 
-  from Tweets
-  where length(content) > 15
+  SELECT tweet_id FROM Tweets WHERE LEN(content) > 15
   ```
-  
 ## 2.Basic Joins [9P]
   * [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql

@@ -45,25 +45,23 @@
     ```
   * [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    select w2.id
-    from weather w1
-    inner join weather w2
-    on w2.temperature > w1.temperature and datediff(w2.recordDate, w1.recordDate) = 1
+    SELECT y.id
+    FROM Weather x INNER JOIN Weather y
+    ON DATEDIFF(DAY, x.recordDate, y.recordDate) = 1 AND y.temperature > x.temperature
     ```
   * [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    select a1.machine_id, round(avg(a2.timestamp * a1.timestamp),3) as processing_time
-    from activity as a1, activity as a2
-    where a1.machine_id = a2.machine_id and a1.process_id = a2.process_id and a1.activity_type = "start" and a2.activity_type = "end"
-    group by a1.machine_id
+    SELECT x.machine_id, round(AVG(y.timestamp - x.timestamp), 3) [processing_time]
+    FROM Activity x INNER JOIN Activity y
+    ON x.machine_id = y.machine_id AND x.process_id = y.process_id AND x.activity_type = 'start' AND y.activity_type = 'end'
+    GROUP BY x.machine_id
     ```
   * [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    select e.name, b.bonus
-    from Employee as e 
-    left join bonus as b
-    on e.empId = b.empId 
-    where b.bonus < 1000 or b.bonus is null
+    SELECT E.name, B.bonus
+    FROM Employee AS E LEFT OUTER JOIN Bonus AS B
+    ON E.empId = B.empId
+    WHERE B.bonus < 1000 OR B.bonus IS NULL
     ```
   * [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql

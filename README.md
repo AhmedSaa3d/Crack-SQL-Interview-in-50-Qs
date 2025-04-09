@@ -28,24 +28,20 @@
 ## 2.Basic Joins [9P]
   * [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    select unique_id, name
-    from Employees
-    left join EmployeeUNI
-    on Employees.id = EmployeeUNI.id
+    SELECT U.unique_id, E.name FROM Employees E LEFT OUTER JOIN EmployeeUNI U ON E.id = U.id
     ```
   * [1068. Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    select product_name, year, price
-    from Sales
-    inner join Product
-    on Product.product_id = Sales.product_id
+    SELECT P.product_name, S.year, S.price FROM Sales S INNER JOIN Product P ON S.product_id = P.product_id
     ```
   * [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    SELECT customer_id, COUNT(*) AS count_no_trans
-    FROM Visits
-    WHERE visit_id NOT IN (SELECT visit_id FROM Transactions)
-    GROUP BY customer_id;
+    SELECT customer_id, COUNT(customer_id) AS 'count_no_trans'
+    FROM Visits V LEFT OUTER JOIN Transactions T
+    ON V.visit_id = T.visit_id
+    WHERE transaction_id IS NULL
+    GROUP BY customer_id
+    ORDER BY 1
     ```
   * [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql

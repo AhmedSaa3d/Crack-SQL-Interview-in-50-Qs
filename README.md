@@ -65,25 +65,19 @@
     ```
   * [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/description/?envType=study-plan-v2&envId=top-sql-50) * Easy
     ``` sql
-    SELECT stud.student_id, stud.student_name, sub.subject_name, COUNT(exam.subject_name) AS attended_exams
-    FROM Students stud
-    CROSS JOIN Subjects sub
-    LEFT JOIN Examinations exam
-    ON stud.student_id = exam.student_id
-    AND sub.subject_name = exam.subject_name
-    GROUP BY stud.student_name, sub.subject_name
-    ORDER BY stud.student_id, sub.subject_name
+    SELECT s.student_id, s.student_name, j.subject_name, COUNT(x.subject_name) AS attended_exams
+    FROM Students s CROSS JOIN Subjects j LEFT JOIN Examinations x 
+    ON s.student_id = x.student_id AND j.subject_name = x.subject_name
+    GROUP BY s.student_id, s.student_name, j.subject_name
+    ORDER BY s.student_id ASC, j.subject_name ASC
     ```
   * [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50) * Medium
     ``` sql
-     select name
-    from employee
-    where id in (
-                  select managerId
-                  from employee
-                  group by managerId
-                  having count(id) >= 5
-              )
+    SELECT e1.name
+    FROM Employee e1 JOIN Employee e2
+    ON e1.id = e2.managerId
+    GROUP BY e1.name, e1.id
+    HAVING COUNT(e1.id) >= 5
     ```
   * [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/description/?envType=study-plan-v2&envId=top-sql-50) * Medium
     ``` sql

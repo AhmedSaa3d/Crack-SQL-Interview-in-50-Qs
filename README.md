@@ -88,30 +88,24 @@
     on s.user_id = c.user_id
     group by user_id
     ```
-    
 ## 3.Basic Aggregate Functions [8P]
   * [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select id, movie, description, rating
-    from Cinema
-    where description <> "boring" and mod(id,2) = 1 
-    order by rating desc
+    SELECT * FROM Cinema WHERE id % 2 = 1 AND description != 'boring' ORDER BY rating DESC
     ```
   * [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select p.product_id, ifnull(round(sum(u.units*p.price)/sum(u.units),2),0) as average_price
-    from Prices as p
-    left join UnitsSold as u
-    on p.product_id = u.product_id and u.purchase_date >= p.start_date and u.purchase_date <= p.end_date
-    group by p.product_id
+    SELECT p.product_id, ISNULL(ROUND(SUM(CONVERT(DECIMAL ,p.price) * u.units) / SUM(u.units), 2), 0) AS average_price
+    FROM Prices p LEFT OUTER JOIN UnitsSold u
+    ON p.product_id = u.product_id AND u.purchase_date >= p.start_date AND u.purchase_date <= p.end_date
+    GROUP BY p.product_id
     ```
   * [1075. Project Employees I](https://leetcode.com/problems/project-employees-i/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select p.project_id, round(avg(e.experience_years),2) as average_years
-    from Project as p
-    left join Employee as e
-    on p.employee_id = e.employee_id
-    group by p.project_id
+    SELECT p.project_id, ROUND(AVG(CAST(e.experience_years AS DECIMAL)),2) AS average_years
+    FROM Employee e INNER JOIN Project p
+    ON e.employee_id = p.employee_id
+    GROUP BY p.project_id
     ```
   * [1633. Percentage of Users Attended a Contest](https://leetcode.com/problems/percentage-of-users-attended-a-contest/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql

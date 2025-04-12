@@ -81,12 +81,10 @@
     ```
   * [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/description/?envType=study-plan-v2&envId=top-sql-50) * Medium
     ``` sql
-    select s.user_id, round(
-          ifnull (count( case when action = 'confirmed' then 1 end) / count(action), 0), 2) as confirmation_rate
-    from signups as s
-    left join confirmations c
-    on s.user_id = c.user_id
-    group by user_id
+    SELECT s.user_id, ROUND(AVG(IIF(c.action = 'confirmed', 1.00, 0.00)), 2) AS confirmation_rate
+    FROM Signups s LEFT OUTER JOIN Confirmations c
+    ON s.user_id = c.user_id
+    GROUP BY s.user_id
     ```
 ## 3.Basic Aggregate Functions [8P]
   * [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
@@ -109,20 +107,16 @@
     ```
   * [1633. Percentage of Users Attended a Contest](https://leetcode.com/problems/percentage-of-users-attended-a-contest/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select r.contest_id ,round((count(u.user_id) / (select count(user_id) from Users))*100.00,2) as percentage
-    from Register as r
-    left join Users as u
-    on r.user_id = u.user_id
-    group by r.contest_id
-      order by percentage desc, r.contest_id asc
+    SELECT contest_id, ROUND(COUNT(user_id) * 1.00 / (SELECT COUNT(*) FROM Users) * 100.00 , 2) AS percentage 
+    FROM Register
+    GROUP BY contest_id
+    ORDER BY percentage DESC, contest_id ASC
     ```
   * [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select query_name, round( sum(rating/position)/count(query_name), 2) as quality,
-         round(count(CASE WHEN rating < 3 THEN 1 END) / count(rating) * 100, 2)  as poor_query_percentage
-    from queries
-    where query_name is not null
-    group by query_name
+    SELECT query_name, ROUND(AVG(rating*1.00 / position), 2) AS quality, ROUND(SUM(IIF(rating < 3 , 1 , 0)) * 100.00 / COUNT(*), 2) AS poor_query_percentage
+    FROM Queries
+    GROUP BY query_name
     ```
   * [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql

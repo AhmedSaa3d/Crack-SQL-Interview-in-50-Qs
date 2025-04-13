@@ -130,18 +130,12 @@
     ```
   * [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql
-    select ROUND(
-           SUM(
-              CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END
-              ) 
-              / COUNT(*) * 100 , 2
-             ) as immediate_percentage
-    from delivery
-    where (customer_id,order_date) in (
-                    select customer_id,min(order_date) 
-                    from delivery 
-                    group by customer_id
-                    )
+    SELECT ROUND(SUM(IIF(order_date = customer_pref_delivery_date , 1 , 0)) * 100.00 / COUNT(*), 2) AS immediate_percentage
+    FROM Delivery d
+    INNER JOIN(
+         SELECT customer_id, MIN(order_date) AS first_order FROM Delivery GROUP BY customer_id
+    ) cmd
+    ON d.customer_id = cmd.customer_id AND d.order_date = cmd.first_order
     ```
   * [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql

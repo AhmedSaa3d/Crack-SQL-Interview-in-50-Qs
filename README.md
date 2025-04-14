@@ -139,13 +139,12 @@
     ```
   * [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql
-    select round( count(a.player_id) / (select count(distinct player_id) from activity), 2) as fraction
-    from (select player_id, min(event_date) as event_date from activity group by player_id) as b
-    left join activity as a
-    on b.player_id = a.player_id 
-    where DATE_ADD(b.event_date, INTERVAL 1 DAY) = A.event_date; 
+    SELECT ROUND(COUNT(*) * 1.00 / (SELECT COUNT(DISTINCT player_id) from Activity), 2) AS fraction
+    FROM (SELECT player_id, MIN(event_date) AS event_date FROM activity GROUP BY player_id) AS First_Player_Login
+    LEFT JOIN Activity a
+    ON First_Player_Login.player_id = a.player_id 
+    WHERE DATEADD(DAY, 1, First_Player_Login.event_date) = a.event_date
     ```
-    
 ## 4.Sorting and Grouping [7P]
   * [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql

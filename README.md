@@ -148,16 +148,16 @@
 ## 4.Sorting and Grouping [7P]
   * [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select teacher_id, count(distinct subject_id) as cnt
-    from teacher
-    group by teacher_id
+    SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt
+    FROM Teacher
+    GROUP BY teacher_id
     ```
   * [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select activity_date as day, count(distinct user_id) as active_users
-    from activity
-    where activity_date between '2019-06-28' and '2019-07-27'
-    group by activity_date
+    SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
+    FROM Activity
+    WHERE activity_date <= '2019-07-27' AND activity_date >= '2019-06-28'
+    GROUP BY activity_date
     ```
   * [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql

@@ -161,13 +161,11 @@
     ```
   * [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql
-    select product_id, year as first_year, quantity, price
-    from sales as s
-    where (product_id, year) in (
-      select product_id, min(year)
-      from sales
-      group by product_id
-    )
+    SELECT s1.product_id, s1.year AS first_year, s1.quantity, s1.price
+    FROM Sales s1 LEFT JOIN 
+        (SELECT product_id, MIN(year) AS year FROM Sales GROUP BY product_id) AS s2
+    ON  s1.product_id = s2.product_id AND s1.year = s2.year
+    WHERE s2.product_id IS NOT NULL
     ```
   * [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql

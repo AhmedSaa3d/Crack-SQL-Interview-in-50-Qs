@@ -169,31 +169,19 @@
     ```
   * [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select class
-    from courses
-    group by class
-    having count(distinct student) >= 5
+    SELECT class FROM Courses GROUP BY class HAVING COUNT(student) >= 5
     ```
   * [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    select user_id , count(follower_id) as followers_count
-    from followers
-    group by user_id
-    order by user_id asc
+    SELECT user_id, COUNT(follower_id) AS followers_count
+    FROM Followers
+    GROUP BY user_id
+    ORDER BY user_id
     ```
   * [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
     ``` sql
-    SELECT CASE 
-      WHEN COUNT(*) > 0 THEN MAX(num)
-      ELSE NULL
-      END 
-      AS num
-    FROM (
-      SELECT num
-      FROM MyNumbers
-      GROUP BY num
-      HAVING COUNT(num) = 1
-    ) as myNewNumbers;
+    SELECT MAX(num) AS num
+    FROM (SELECT num FROM MyNumbers GROUP BY num HAVING COUNT(num) = 1) AS single_nums
     ```
   * [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
     ``` sql

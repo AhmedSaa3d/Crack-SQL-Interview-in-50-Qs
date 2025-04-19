@@ -214,24 +214,18 @@
  ## 5.Advanced Select and Joins [7P]
  * [1731. The Number of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
-   select e1.employee_id, e1.name,
-       count(e2.reports_to) as reports_count, round(avg(e2.age)) as average_age
-   from employees as e1
-   join employees as e2
-   on e1.employee_id = e2.reports_to
-   group by e1.employee_id
-   order by employee_id
+   SELECT a.employee_id, a.name, COUNT(b.reports_to) AS reports_count, ROUND(AVG(b.age*1.00), 0) AS average_age
+   FROM Employees a INNER JOIN Employees b
+   ON a.employee_id = b.reports_to
+   GROUP BY a.employee_id, a.name
+   ORDER BY a.employee_id
    ```
 * [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
-  SELECT employee_id, department_id
-  FROM Employee
-  WHERE primary_flag = 'Y'
-  UNION
-  SELECT employee_id, department_id
-  FROM Employee
-  GROUP BY employee_id
-  HAVING count(employee_id) = 1;
+  SELECT e1.employee_id, e1.department_id
+  FROM Employee e1 LEFT JOIN Employee e2 
+  ON e1.employee_id = e2.employee_id AND e2.primary_flag = 'Y'
+  WHERE e1.primary_flag = 'Y' OR e2.employee_id IS NULL
   ```
 * [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
@@ -240,16 +234,15 @@
         WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes'
         ELSE 'No'
     END AS triangle
-  FROM Triangle;
+  FROM Triangle
   ```
 * [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-   SELECT DISTINCT L1.num AS ConsecutiveNums
-  FROM Logs L1
-  INNER JOIN Logs L2 
-  ON L1.id - L2.id = 1 AND L1.num = L2.num
-  INNER JOIN Logs L3 
-  ON L1.id - L3.id = 2 AND L1.num = L3.num
+   SELECT DISTINCT l1.num AS ConsecutiveNums
+   FROM Logs l1 JOIN Logs l2
+   ON l1.id+1 = l2.id AND l1.num = l2.num
+   JOIN Logs l3
+   ON l2.id+1 = l3.id AND l2.num = l3.num
   ```  
 * [1164. Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

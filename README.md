@@ -277,17 +277,14 @@
   ```
 * [1907. Count Salary Categories](https://leetcode.com/problems/count-salary-categories/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
-  SELECT 'Low Salary' AS category , COUNT(account_id) AS accounts_count 
-  FROM Accounts 
-  WHERE income < 20000
-  UNION
-  SELECT 'Average Salary' AS category , COUNT(account_id) AS accounts_count 
-  FROM Accounts 
-  WHERE income >= 20000 AND income <= 50000
-  UNION
-  SELECT 'High Salary' AS category , COUNT(account_id) AS accounts_count 
-  FROM Accounts 
-  WHERE income > 50000;
+  SELECT 'Low Salary' AS category, SUM(CASE WHEN income < 20000 THEN 1 ELSE 0 END) AS accounts_count
+  FROM Accounts
+  UNION ALL
+  SELECT 'Average Salary' AS category, SUM(CASE WHEN income BETWEEN 20000 AND 50000 THEN 1 ELSE 0 END) AS accounts_count
+  FROM Accounts
+  UNION ALL
+  SELECT 'High Salary' AS category, SUM(CASE WHEN income > 50000 THEN 1 ELSE 0 END) AS accounts_count
+  FROM Accounts;
   ```       
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy

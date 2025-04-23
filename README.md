@@ -367,21 +367,21 @@
  ## 7.Advanced String Functions / Regex / Clause [7P]
 * [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  select user_id, 
-      concat(
-          upper(left(name,1)) , 
-          lower(right(name, length(name)-1))) as name
-  from users
-  order by user_id
+  SELECT user_id, CONCAT(
+        UPPER(SubSTRING(name, 1, 1)),
+        LOWER(SUBSTRING(name, 2, LEN(name)))
+        ) as name
+  FROM Users
+  ORDER BY user_id
   ```
 * [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  select *
-  from patients
-  where conditions LIKE '% DIAB1__ %' OR
-       conditions LIKE 'DIAB1__ %' OR
-       conditions LIKE '% DIAB1__' OR
-       conditions LIKE 'DIAB1__' 
+  SELECT patient_id , patient_name, conditions
+  FROM Patients
+  WHERE conditions LIKE '% DIAB1__ %' OR
+      conditions LIKE 'DIAB1__ %' OR
+      conditions LIKE '% DIAB1__' OR
+      conditions LIKE 'DIAB1__'  
   ```
 * [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql

@@ -379,15 +379,15 @@
   SELECT patient_id , patient_name, conditions
   FROM Patients
   WHERE conditions LIKE '% DIAB1__ %' OR
-      conditions LIKE 'DIAB1__ %' OR
-      conditions LIKE '% DIAB1__' OR
-      conditions LIKE 'DIAB1__'  
+        conditions LIKE 'DIAB1__ %' OR
+        conditions LIKE '% DIAB1__' OR
+        conditions LIKE 'DIAB1__'  
   ```
 * [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  delete p
-  from person as p , person as s
-  where p.email = s.email and p.id > s.id 
+  DELETE p1
+  FROM Person p1, Person p2
+  WHERE p1.email = p2.email AND p1.id > p2.id
   ```
 * [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql 
@@ -400,28 +400,27 @@
   ```
 * [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  select sell_date, 
-       count(distinct(product)) as num_sold,
-       GROUP_CONCAT(distinct(product) SEPARATOR ',' ) as products 
-  from activities
-  group by sell_date
-  order by sell_date
+  SELECT sell_date, 
+       COUNT(product) AS num_sold, 
+       STRING_AGG(product, ',') WITHIN GROUP (ORDER BY product) AS products
+  FROM ( SELECT sell_date, product FROM Activities GROUP BY sell_date, product ) AS DistinctProducts
+  GROUP BY sell_date
+  ORDER BY sell_date
   ```
 * [1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql
-  select p.product_name, sum(o.unit) as unit
-  from products as p
-  left join orders as o
-  on p.product_id = o.product_id
-  where YEAR(o.order_date) = 2020
-      AND MONTH(o.order_date) = 2
-  group by p.product_id
-  having unit >= 100  
-   # another sol use --> WHERE DATE_FORMAT(O.order_date,'%Y-%m') ='2020-02'
+  SELECT p.product_name, SUM(o.unit) AS unit
+  FROM Products p INNER JOIN Orders o
+  ON p.product_id = o.product_id
+  WHERE YEAR(o.order_date) = '2020' AND MONTH(o.order_date) = '02'
+  GROUP BY p.product_name
+  HAVING SUM(o.unit) >= 100
   ```
 * [1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails/description/?envType=study-plan-v2&envId=top-sql-500) - Easy
   ``` sql
-  select *
-  from users
-  where mail regexp '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\\.com$'
+  SELECT user_id, name, mail
+  FROM Users
+  WHERE RIGHT(mail, 13) = '@leetcode.com'
+        AND LEFT(mail, LEN(mail) - 13) LIKE '[A-Za-z]%'
+        AND LEFT(mail, LEN(mail) - 13) NOT LIKE '%[^A-Za-z0-9_.-]%'
   ```

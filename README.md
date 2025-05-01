@@ -289,14 +289,11 @@
  ## 6.Subqueries [7P]
  * [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
    ``` sql
-   SELECT employee_id
-   FROM employees
-   WHERE  salary < 30000 and 
-       manager_id NOT IN(
-            SELECT employee_id
-            FROM employees
-      )
-   ORDER BY employee_id
+   SELECT y.employee_id
+   FROM Employees y LEFT JOIN Employees x
+   ON y.manager_id = x.employee_id
+   WHERE y.salary < 30000 AND y.manager_id IS NOT NULL AND x.employee_id IS NULL
+   ORDER BY y.employee_id
    ```
  * [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

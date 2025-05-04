@@ -358,9 +358,17 @@
   ```
  * [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/description/?envType=study-plan-v2&envId=top-sql-50) - Hard
   ``` sql
-
+  SELECT Department, Employee, Salary
+  FROM (
+        SELECT d.name AS Department,
+        e.name AS Employee,
+        e.salary AS Salary ,
+        Dense_rank() over (PARTITION BY d.name ORDER BY e.salary DESC) AS dr 
+        FROM Employee e INNER JOIN Department d
+        ON e.departmentId = d.id
+  ) AS JointData
+  WHERE dr <= 3
   ```
-
  ## 7.Advanced String Functions / Regex / Clause [7P]
 * [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/?envType=study-plan-v2&envId=top-sql-50) - Easy
   ``` sql

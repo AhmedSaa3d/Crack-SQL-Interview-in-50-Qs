@@ -298,14 +298,12 @@
  * [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql
    SELECT s1.id, s2.student
-   FROM Seat s1
-   LEFT JOIN Seat s2
-   ON s2.id = 
-   CASE 
-     WHEN s1.id % 2 = 0 THEN s1.id - 1 
-     WHEN s1.id % 2 = 1 AND (SELECT COUNT(*) FROM Seat) = s1.id THEN s1.id
-     WHEN s1.id % 2 = 1 THEN s1.id + 1
-   END;
+   FROM Seat s1 LEFT JOIN Seat s2
+   ON s1.id =
+             CASE WHEN s2.id % 2 = 0 THEN s2.id - 1
+             WHEN s2.id % 2 = 1 AND s2.id != (SELECT COUNT(*) FROM Seat) THEN s2.id + 1
+             ELSE s2.id
+    END
    ```
  * [1341. Movie Rating](https://leetcode.com/problems/movie-rating/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
    ``` sql

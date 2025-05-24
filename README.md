@@ -306,29 +306,27 @@
     END
    ```
  * [1341. Movie Rating](https://leetcode.com/problems/movie-rating/description/?envType=study-plan-v2&envId=top-sql-50) - Medium
-   ``` sql
-   select name as results
-   from (
-    select u.name, count(u.name) as cnt 
-    from movieRating as m
-    join users as u
-    on u.user_id = m.user_id
-    group by u.name
-    order by cnt desc, u.name asc
-    limit 1
-   ) as innerTble1
+   ``` sql 
+   SELECT name AS results 
+   FROM (
+      SELECT u.name, COUNT(u.name) AS cnt 
+      FROM movieRating AS m 
+      JOIN users AS u ON u.user_id = m.user_id 
+      GROUP BY u.name 
+      ORDER BY cnt DESC, u.name ASC 
+      OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY
+   ) AS innerTble1
    UNION ALL
-   select title as results
-   from (
-    select s.title, avg(m.rating) as rat 
-    from movieRating as m
-    join movies as s
-    on s.movie_id = m.movie_id
-    where MONTH(m.created_at) = 2 AND YEAR(m.created_at) = 2020
-    group by s.title
-    order by rat desc, s.title asc
-    limit 1
-   ) as innerTble2
+   SELECT title AS results  
+   FROM (
+      SELECT s.title, AVG(CAST(m.rating AS FLOAT)) AS rat 
+      FROM movieRating AS m 
+      JOIN movies AS s ON s.movie_id = m.movie_id 
+      WHERE MONTH(m.created_at) = 2 AND YEAR(m.created_at) = 2020 
+      GROUP BY s.title 
+      ORDER BY rat DESC, s.title ASC 
+      OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY
+   ) AS innerTble2
    ```
  * [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql

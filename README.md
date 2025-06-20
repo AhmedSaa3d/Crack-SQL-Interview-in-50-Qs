@@ -330,7 +330,21 @@
    ```
  * [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql
-
+   WITH DailyAmountTable AS (
+     SELECT visited_on, COUNT(customer_id) AS dayCusts, SUM(amount) AS dayTotal
+     FROM Customer
+     GROUP BY visited_on
+  ), 
+  Last7DaysTable AS (
+     SELECT visited_on, 
+            SUM(dayTotal) OVER (ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS amount,
+            ROUND(AVG(CAST(dayTotal AS FLOAT)) OVER (ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW), 2) AS average_amount
+     FROM DailyAmountTable
+  )
+  SELECT * 
+  FROM Last7DaysTable
+  WHERE visited_on >= DATEADD(day, 6 ,(SELECT MIN(visited_on) FROM DailyAmountTable)) 
+  ORDER BY visited_on;
   ```
  * [602. Friend Requests II: Who Has the Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/?envType=study-plan-v2&envId=top-sql-50) - Medium
   ``` sql
